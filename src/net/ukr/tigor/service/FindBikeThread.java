@@ -15,6 +15,12 @@ public class FindBikeThread implements Runnable {
         this.usersBike = usersBike;
     }
 
+    /**
+     *
+     * @param userBike - bike for search that the user entered
+     * @param catalogBike - bike from catalog
+     * @return true if the fields match
+     */
     private static boolean equalFields(Object userBike, Object catalogBike) {
         Field[] fields = userBike.getClass().getDeclaredFields();
         for (Field userfield : fields) {
@@ -24,10 +30,10 @@ public class FindBikeThread implements Runnable {
                 Field fieldCatalogBikes = catalogBike.getClass().getDeclaredField(userfield.getName());
                 fieldCatalogBikes.setAccessible(true);
                 Object dataUserField = userfield.get(userBike);
+                // if the fields are empty, they are not searched
                 if (dataUserField == null || dataUserField.equals(0) || dataUserField.equals(false)) {
                     continue;
                 }
-
                 if (!userfield.get(userBike).equals(fieldCatalogBikes.get(catalogBike))) {
                     return false;
                 }
@@ -43,17 +49,22 @@ public class FindBikeThread implements Runnable {
         findBike();
     }
 
+    /**
+     * match search method
+     */
     private  void findBike() {
+        // set marker to prohibit changing the list during the search
         catalog.setLockForChange(true);
         List<Bike> bikes = catalog.getCatalogOfBikes();
 //        synchronized(catalog) {
             Bike bikeFromCatalog = null;
             for (Bike bike : bikes) {
-                try {
-                    Thread.sleep(100);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
+//                for test
+//                try {
+//                    Thread.sleep(100);
+//                } catch (InterruptedException e) {
+//                    e.printStackTrace();
+//                }
                 if (usersBike.equalsByParams(bike) && equalFields(usersBike, bike)) {
                     bikeFromCatalog = bike;
                     break;
@@ -66,6 +77,7 @@ public class FindBikeThread implements Runnable {
                 System.out.println("You looking for: " + usersBike +" Result: " + bikeFromCatalog);
             }
 //        }
+        // marker reset
         catalog.setLockForChange(false);
     }
 

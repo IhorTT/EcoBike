@@ -66,12 +66,22 @@ public class Utils {
         }
     }
 
+    /**
+     * for input data from keyboard
+     * @param question- question question to show for user
+     * @return - user entered value
+     * @throws IOException - execution forwarding
+     */
     private static String getUserAnswer(String question) throws IOException {
         System.out.println(question);
         BufferedReader r = new BufferedReader(new InputStreamReader(System.in));
         return r.readLine();
     }
 
+    /**
+     * organizes a bike request from the user to search the directory
+     * search occurs in a separate thread
+     */
     private static void showFirstItem() throws IOException, IllegalAccessException {
 
         System.out.println("Enter your search options");
@@ -85,6 +95,10 @@ public class Utils {
 
     }
 
+    /**
+     * for input new bike from user
+     * @param typeBike - type of bike
+     */
     private static void inputNewBike(String typeBike) throws IOException, IllegalAccessException {
         if (catalog.isLockForChange()) {
             System.out.println("Catalog is busy searching. Try later.");
@@ -99,6 +113,13 @@ public class Utils {
         System.out.println(typeBike + " successfully added");
     }
 
+    /**
+     *
+     * @param typeBike - type of bike
+     * @param brand - btand of bike
+     * @param forSearch - if method used to search
+     * @return new bike from user request
+     */
     private static Bike createBike(String typeBike, String brand, boolean forSearch) throws IOException, IllegalAccessException {
         Bike bike = null;
         switch (typeBike) {
@@ -119,6 +140,11 @@ public class Utils {
         return bike;
     }
 
+    /**
+     *
+     * @param bike - bike for filling of fields
+     * @param forSearc - if method used to search
+     */
     private static void fillFields(Object bike, boolean forSearc) throws IOException, IllegalAccessException {
 
         String hint = "";
@@ -137,6 +163,13 @@ public class Utils {
         }
     }
 
+    /**
+     * interactive field filling
+     * @param bike - new created bike
+     * @param field - field to fill
+     * @param prompt - data entry request
+     * @param forSearch - if method used to search
+     */
     private static void setFieldFromUserInput(Object bike, Field field, String prompt, boolean forSearch) throws IllegalAccessException, IOException {
 
         boolean wrongInput = false;
@@ -173,6 +206,9 @@ public class Utils {
         }
     }
 
+    /**
+     * displays a catalog of bikes of 20 items per page
+     */
     private static void showCatalog() {
         List<Bike> bikes = catalog.getCatalogOfBikes();
         int countLineInPage = 20;
@@ -195,6 +231,9 @@ public class Utils {
         }
     }
 
+    /**
+     * load catalog from file
+     */
     public static void loadCatalog() throws IOException {
         try (BufferedReader bf = new BufferedReader(new FileReader(file))) {
             String str;
@@ -218,6 +257,9 @@ public class Utils {
         }
     }
 
+    /**
+     * save changes from catalog to file
+     */
     private static void writeChangesToFile() {
         for (Bike bike : catalog.getCatalogOfBikes()) {
             if (bike.isNewBike()) {
@@ -233,6 +275,11 @@ public class Utils {
         System.out.println("Data saved to file successfully ");
     }
 
+    /**
+     * creates a new bike from an array of strings
+     * @param arrFields - array of strings
+     * @return - new created bike
+     */
     private static Bike getBikeFromTxt(String[] arrFields) {
 
         if (arrFields[0].contains("SPEEDELEC")) {
