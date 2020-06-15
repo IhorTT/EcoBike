@@ -1,0 +1,12 @@
+FOLDING BIKE Benetti; 24; 27; 11400; false; rose; 1009
+FOLDING BIKE Benetti; 24; 6; 9400; true; silver; 1195
+FOLDING BIKE Formula; 16; 21; 12200; true; flame; 269
+FOLDING BIKE Intertool; 24; 21; 12900; true; coral; 1565
+SPEEDELEC Booster; 35; 10900; false; 13200; green; 1279
+E-BIKE Felt; 60; 28300; false; 9000; grey; 2229
+E-BIKE Mando Footloose; 20; 26800; false; 12000; beige; 1559
+FOLDING BIKE Terya; 20; 24; 5000; false; black; 500
+FOLDING BIKE 1; 1; 1; 1; false; 1; 1
+FOLDING BIKE teray; 1; 1; 1; true; f; 2
+FOLDING BIKE sfs; 1; 1; 1; false; 1; 1
+FOLDING BIKE fff; 1; 1; 1; false; 2e; 1
